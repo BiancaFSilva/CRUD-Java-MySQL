@@ -6,7 +6,7 @@ public class ModuloConexao {
         java.sql.Connection conexao = null;
 
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/";
+        String url = "jdbc:mysql://localhost:3306/crud-java-mysql";
         String user = "root";
         String password = "";
 
