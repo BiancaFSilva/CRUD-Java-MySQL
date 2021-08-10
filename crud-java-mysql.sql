@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/07/2021 às 17:26
+-- Tempo de geração: 10/08/2021 às 22:35
 -- Versão do servidor: 10.4.13-MariaDB
 -- Versão do PHP: 7.4.8
 
@@ -26,8 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Estrutura para tabela `client`
 --
--- Criação: 27/07/2021 às 14:45
---
 
 CREATE TABLE `client` (
   `client_id` int(11) NOT NULL,
@@ -45,8 +43,6 @@ CREATE TABLE `client` (
 
 --
 -- Estrutura para tabela `ordem_servico`
---
--- Criação: 27/07/2021 às 15:11
 --
 
 CREATE TABLE `ordem_servico` (
@@ -71,8 +67,6 @@ CREATE TABLE `ordem_servico` (
 --
 -- Estrutura para tabela `user`
 --
--- Criação: 27/07/2021 às 14:21
---
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
@@ -85,6 +79,13 @@ CREATE TABLE `user` (
 --
 -- RELACIONAMENTOS PARA TABELAS `user`:
 --
+
+--
+-- Despejando dados para a tabela `user`
+--
+
+INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`) VALUES
+(1, 'Administrador Principal', 'admin', '1234', '');
 
 --
 -- Índices de tabelas apagadas
@@ -129,7 +130,7 @@ ALTER TABLE `ordem_servico`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para dumps de tabelas
