@@ -22,6 +22,8 @@ public class Login extends javax.swing.JFrame {
                 //System.out.println("Vamos abrir a tela principal");
                 Principal home = new Principal();
                 home.setVisible(true);
+                this.dispose();
+                conexao.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
             }           
