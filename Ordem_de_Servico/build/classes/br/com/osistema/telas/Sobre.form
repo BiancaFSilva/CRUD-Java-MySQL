@@ -97,7 +97,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="relat&#xf3;rios das ordens geradas e implementa&#xe7;&#xe3;o de um siste-"/>
+        <Property name="text" type="java.lang.String" value="relat&#xf3;rios das ordens geradas e implementa&#xe7;&#xe3;o de um sis-"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -105,7 +105,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="ema de login com verifica&#xe7;&#xe3;o den&#xed;vel de usu&#xe1;rio.&#xa;"/>
+        <Property name="text" type="java.lang.String" value="tema de login com verifica&#xe7;&#xe3;o de n&#xed;vel de usu&#xe1;rio. "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">

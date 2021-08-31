@@ -1,5 +1,4 @@
 package br.com.osistema.telas;
-
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -21,15 +20,15 @@ public class Principal extends javax.swing.JFrame {
         lblData = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        menuCadastro = new javax.swing.JMenu();
         opCliente = new javax.swing.JMenuItem();
         opOS = new javax.swing.JMenuItem();
         opUsers = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menuRelatorio = new javax.swing.JMenu();
         opServicos = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        menuAjuda = new javax.swing.JMenu();
         opSobre = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        menuOpcao = new javax.swing.JMenu();
         opSair = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -63,10 +62,15 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/x.png"))); // NOI18N
 
-        jMenu2.setText("Cadastro");
+        menuCadastro.setText("Cadastro");
+        menuCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroActionPerformed(evt);
+            }
+        });
 
         opCliente.setText("Cliente");
-        jMenu2.add(opCliente);
+        menuCadastro.add(opCliente);
 
         opOS.setText("OS");
         opOS.addActionListener(new java.awt.event.ActionListener() {
@@ -74,21 +78,23 @@ public class Principal extends javax.swing.JFrame {
                 opOSActionPerformed(evt);
             }
         });
-        jMenu2.add(opOS);
+        menuCadastro.add(opOS);
 
         opUsers.setText("Usuários");
-        jMenu2.add(opUsers);
+        opUsers.setEnabled(false);
+        menuCadastro.add(opUsers);
 
-        Menu.add(jMenu2);
+        Menu.add(menuCadastro);
 
-        jMenu3.setText("Relatórios");
+        menuRelatorio.setText("Relatórios");
+        menuRelatorio.setEnabled(false);
 
         opServicos.setText("Serviços");
-        jMenu3.add(opServicos);
+        menuRelatorio.add(opServicos);
 
-        Menu.add(jMenu3);
+        Menu.add(menuRelatorio);
 
-        jMenu4.setText("Ajuda");
+        menuAjuda.setText("Ajuda");
 
         opSobre.setText("Sobre");
         opSobre.addActionListener(new java.awt.event.ActionListener() {
@@ -96,11 +102,11 @@ public class Principal extends javax.swing.JFrame {
                 opSobreActionPerformed(evt);
             }
         });
-        jMenu4.add(opSobre);
+        menuAjuda.add(opSobre);
 
-        Menu.add(jMenu4);
+        Menu.add(menuAjuda);
 
-        jMenu5.setText("Opções");
+        menuOpcao.setText("Opções");
 
         opSair.setText("Sair");
         opSair.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +114,9 @@ public class Principal extends javax.swing.JFrame {
                 opSairActionPerformed(evt);
             }
         });
-        jMenu5.add(opSair);
+        menuOpcao.add(opSair);
 
-        Menu.add(jMenu5);
+        Menu.add(menuOpcao);
 
         setJMenuBar(Menu);
 
@@ -171,6 +177,12 @@ public class Principal extends javax.swing.JFrame {
         sobre.setVisible(true);
     }//GEN-LAST:event_opSobreActionPerformed
 
+    private void menuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroActionPerformed
+        Users usuarios = new Users();
+        usuarios.setVisible(true);
+        Desktop.add(usuarios);
+    }//GEN-LAST:event_menuCadastroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -211,19 +223,19 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar Menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblData;
-    private javax.swing.JLabel lblUser;
+    public static javax.swing.JLabel lblUser;
+    private javax.swing.JMenu menuAjuda;
+    private javax.swing.JMenu menuCadastro;
+    private javax.swing.JMenu menuOpcao;
+    public static javax.swing.JMenu menuRelatorio;
     private javax.swing.JMenuItem opCliente;
     private javax.swing.JMenuItem opOS;
     private javax.swing.JMenuItem opSair;
     private javax.swing.JMenuItem opServicos;
     private javax.swing.JMenuItem opSobre;
-    private javax.swing.JMenuItem opUsers;
+    public static javax.swing.JMenuItem opUsers;
     // End of variables declaration//GEN-END:variables
 
 }

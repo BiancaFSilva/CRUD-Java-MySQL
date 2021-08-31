@@ -31,10 +31,10 @@ public class Sobre extends javax.swing.JFrame {
         jLabel1.setText("controle de Ordens de Serviço com emissão e acesso aos ");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("relatórios das ordens geradas e implementação de um siste-");
+        jLabel2.setText("relatórios das ordens geradas e implementação de um sis-");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("ema de login com verificação denível de usuário.\n");
+        jLabel3.setText("tema de login com verificação de nível de usuário. ");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Desenvolvido por Bianca Silva, 2021. Sob a licença GNU");

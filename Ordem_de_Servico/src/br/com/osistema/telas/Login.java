@@ -14,20 +14,37 @@ public class Login extends javax.swing.JFrame {
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtUser.getText());
-            pst.setString(2, txtSenha.getText());
+            //pst.setString(2, txtSenha.getText());
+            String cap_senha = new String(txtSenha.getPassword());
+            pst.setString(2, cap_senha);
             
             rs = pst.executeQuery();
             
             if (rs.next()) {
-                //System.out.println("Vamos abrir a tela principal");
-                Principal home = new Principal();
-                home.setVisible(true);
-                this.dispose();
-                conexao.close();
+                String perfil = rs.getString(6);                
+                System.out.println("Olá" + perfil + "! Vamos abrir a tela principal");
+                
+                if (perfil.equals("admin")) {
+                    Principal home = new Principal();
+                    home.setVisible(true);
+                    home.menuRelatorio.setEnabled(true);
+                    home.opUsers.setEnabled(true);
+                    home.lblUser.setText(rs.getString(2));
+                    this.dispose();
+                    conexao.close();
+                } else {
+                    Principal home = new Principal();
+                    home.setVisible(true);
+                    Principal.lblUser.setText(rs.getString(2));
+                    this.dispose();
+                    conexao.close();
+                }               
+
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
             }           
         } catch (Exception e) {  
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     
