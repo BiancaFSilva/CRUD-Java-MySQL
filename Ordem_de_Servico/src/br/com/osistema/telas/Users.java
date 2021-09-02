@@ -41,6 +41,85 @@ public class Users extends javax.swing.JInternalFrame {
         }
     }
 
+    private void adicionar() {
+        String sql = "INSERT INTO users (user_id, user, login, senha, fone, perfil) VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try {
+            pst = conexao.prepareStatement(sql);
+            
+            pst.setString(1, txtID.getText());
+            pst.setString(2, txtNome.getText());
+            pst.setString(3, txtLogin.getText());
+            String pega_senha = new String(txtSenha.getPassword()); 
+            pst.setString(4, pega_senha);
+            pst.setString(5, txtFone.getText());
+            pst.setString(6, comboPerfil.getSelectedItem().toString());
+                        
+            if (txtID.getText().isEmpty() || txtNome.getText().isEmpty() || txtLogin.getText().isEmpty() || 
+            txtSenha.getText().isEmpty() || txtFone.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+            } else {
+                int adicionado = pst.executeUpdate();
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso");
+                    txtNome.setText(null);
+                    txtLogin.setText(null);
+                    txtSenha.setText(null);
+                    txtFone.setText(null);
+                    comboPerfil.setSelectedItem(null);
+                } 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    /*
+    
+    private void excluir() {
+        String sql = "DELETE FROM users WHERE user_id=?";
+        
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtID.getText());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {                
+                JOptionPane.showMessageDialog(null, "Usuário excluido com sucesso");
+                txtNome.setText(null);
+                txtLogin.setText(null);
+                txtSenha.setText(null);
+                txtFone.setText(null);
+                comboPerfil.setSelectedItem(null);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private void editar() {
+        String sql = "UPDATE users SET user=?, login=?, senha=?, fone=?, perfil=? WHERE user_id=?";
+        
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtID.getText());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {                
+                JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso");
+                txtNome.setText(rs.getString(2));
+                txtLogin.setText(rs.getString(3));
+                txtSenha.setText(rs.getString(4));
+                txtFone.setText(rs.getString(5));
+                comboPerfil.setSelectedItem(rs.getString(6));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,6 +148,11 @@ public class Users extends javax.swing.JInternalFrame {
         setVisible(true);
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/create.png"))); // NOI18N
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/read.png"))); // NOI18N
         btnRead.addActionListener(new java.awt.event.ActionListener() {
@@ -78,8 +162,18 @@ public class Users extends javax.swing.JInternalFrame {
         });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/update.png"))); // NOI18N
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/delete.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         lblID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblID.setLabelFor(txtID);
@@ -128,37 +222,16 @@ public class Users extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblID)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtID))
-                            .addComponent(btnCreate))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRead)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUpdate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDelete))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblNome)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSenha)
-                                            .addComponent(lblPerfil))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtSenha)
-                                            .addComponent(comboPerfil, 0, 186, Short.MAX_VALUE)))
-                                    .addComponent(txtNome)))))
+                        .addComponent(lblID)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(lblNome)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNome))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLogin)
@@ -166,8 +239,27 @@ public class Users extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtFone, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(txtLogin))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtLogin)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSenha)
+                                    .addComponent(lblPerfil))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnUpdate)
+                                    .addComponent(btnCreate))
+                                .addGap(42, 42, 42)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRead)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtSenha)
+                                .addComponent(comboPerfil, 0, 186, Short.MAX_VALUE))
+                            .addComponent(btnDelete))))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,12 +284,14 @@ public class Users extends javax.swing.JInternalFrame {
                     .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPerfil)
                     .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCreate)
-                    .addComponent(btnRead)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
+                    .addComponent(btnRead))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDelete)
+                    .addComponent(btnUpdate))
                 .addGap(48, 48, 48))
         );
 
@@ -211,6 +305,18 @@ public class Users extends javax.swing.JInternalFrame {
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
         consultar();
     }//GEN-LAST:event_btnReadActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        adicionar();
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        editar();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        excluir();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
