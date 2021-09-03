@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/08/2021 às 22:35
+-- Tempo de geração: 03/09/2021 às 14:16
 -- Versão do servidor: 10.4.13-MariaDB
 -- Versão do PHP: 7.4.8
 
@@ -73,7 +73,8 @@ CREATE TABLE `user` (
   `user` varchar(50) NOT NULL,
   `login` varchar(15) NOT NULL,
   `senha` varchar(15) NOT NULL,
-  `fone` varchar(15) NOT NULL
+  `fone` varchar(15) NOT NULL,
+  `perfil` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -84,8 +85,10 @@ CREATE TABLE `user` (
 -- Despejando dados para a tabela `user`
 --
 
-INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`) VALUES
-(1, 'Administrador Principal', 'admin', '1234', '');
+INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`, `perfil`) VALUES
+(1, 'Administrador Principal', 'admin', '1234', '940028922', 'admin'),
+(2, 'Bianca Silva', 'beanca', '4321', '948485353', 'admin'),
+(3, 'Usuário Comum', 'user', '1234', '915907530', 'user');
 
 --
 -- Índices de tabelas apagadas
@@ -130,7 +133,7 @@ ALTER TABLE `ordem_servico`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para dumps de tabelas
