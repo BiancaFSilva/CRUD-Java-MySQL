@@ -50,7 +50,7 @@ public class Users extends javax.swing.JInternalFrame {
             pst.setString(1, txtID.getText());
             pst.setString(2, txtNome.getText());
             pst.setString(3, txtLogin.getText());
-            String pega_senha = new String(txtSenha.getPassword()); 
+            String pega_senha = new String(txtSenha.getText()); 
             pst.setString(4, pega_senha);
             pst.setString(5, txtFone.getText());
             pst.setString(6, comboPerfil.getSelectedItem().toString());
@@ -74,8 +74,7 @@ public class Users extends javax.swing.JInternalFrame {
         }
     }
     
-    /*
-    
+    /*    
     private void excluir() {
         String sql = "DELETE FROM users WHERE user_id=?";
         
@@ -96,6 +95,7 @@ public class Users extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    */
     
     private void editar() {
         String sql = "UPDATE users SET user=?, login=?, senha=?, fone=?, perfil=? WHERE user_id=?";
@@ -103,22 +103,31 @@ public class Users extends javax.swing.JInternalFrame {
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtID.getText());
-            rs = pst.executeQuery();
+            pst.setString(2, txtNome.getText());
+            pst.setString(3, txtLogin.getText());
+            String pega_senha = new String(txtSenha.getText()); 
+            pst.setString(4, pega_senha);
+            pst.setString(5, txtFone.getText());
+            pst.setString(6, comboPerfil.getSelectedItem().toString());
 
-            if (rs.next()) {                
-                JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso");
-                txtNome.setText(rs.getString(2));
-                txtLogin.setText(rs.getString(3));
-                txtSenha.setText(rs.getString(4));
-                txtFone.setText(rs.getString(5));
-                comboPerfil.setSelectedItem(rs.getString(6));
+            if (txtID.getText().isEmpty() || txtNome.getText().isEmpty() || txtLogin.getText().isEmpty() || 
+            txtSenha.getText().isEmpty() || txtFone.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Falha! Preencha todos os campos.");
+            } else {        
+                int atualiza = pst.executeUpdate();
+                if (atualiza > 0) {
+                    JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso");
+                    txtNome.setText(rs.getString(2));
+                    txtLogin.setText(rs.getString(3));
+                    txtSenha.setText(rs.getString(4));
+                    txtFone.setText(rs.getString(5));
+                    comboPerfil.setSelectedItem(rs.getString(6));
+                }                 
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    */
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
