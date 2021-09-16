@@ -73,29 +73,31 @@ public class Users extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    /*    
+  
     private void excluir() {
-        String sql = "DELETE FROM users WHERE user_id=?";
+        int excluir = JOptionPane.showConfirmDialog(null, "Tem certeza de que quer excluir?", "Atenção", JOptionPane.YES_NO_OPTION);
         
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtID.getText());
-            rs = pst.executeQuery();
+        if (excluir == JOptionPane.YES_OPTION) {
+            String sql = "DELETE FROM users WHERE user_id=?";
+        
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtID.getText());
+                int apaga = pst.executeUpdate();
 
-            if (rs.next()) {                
-                JOptionPane.showMessageDialog(null, "Usuário excluido com sucesso");
-                txtNome.setText(null);
-                txtLogin.setText(null);
-                txtSenha.setText(null);
-                txtFone.setText(null);
-                comboPerfil.setSelectedItem(null);
+                if (apaga > 0) {                
+                    JOptionPane.showMessageDialog(null, "Usuário excluido com sucesso");
+                    txtNome.setText(null);
+                    txtLogin.setText(null);
+                    txtSenha.setText(null);
+                    txtFone.setText(null);
+                    comboPerfil.setSelectedItem(null);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
         }
     }
-    */
     
     private void editar() {
         String sql = "UPDATE users SET user=?, login=?, senha=?, fone=?, perfil=? WHERE user_id=?";
