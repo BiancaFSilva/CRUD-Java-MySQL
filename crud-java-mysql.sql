@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/09/2021 às 14:16
--- Versão do servidor: 10.4.13-MariaDB
--- Versão do PHP: 7.4.8
+-- Generation Time: Oct 01, 2021 at 08:13 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `crud-java-mysql`
+-- Database: `crud-java-mysql`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `client`
+-- Table structure for table `client`
 --
 
 CREATE TABLE `client` (
@@ -36,13 +36,26 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELACIONAMENTOS PARA TABELAS `client`:
+-- Dumping data for table `client`
 --
+
+INSERT INTO `client` (`client_id`, `nome_cli`, `email_cli`, `end_cli`, `fone_cli`) VALUES
+(1, 'Tupã', 'tupagod@gmail.com', 'São Paulo, Brasil', '1234-5678'),
+(2, 'Jaci', 'noite.jaci@gmail.com', 'São Paulo, Brasil', '5654-4474'),
+(3, 'Guaraci', 'guaraci@gmail.com', 'São Paulo, Brasil', '6208-4208'),
+(4, 'Ceuci', 'ceuci@gmail.com', 'São Paulo, Brasil', '9510-7530'),
+(5, 'Anhangá', 'anhanga@gmail.com', 'São Paulo, Brasil', '7530-9510'),
+(6, 'Sumé', 'sume@gmail.com', 'São Paulo, Brasil', '4826-9537'),
+(7, 'Akuanduba', 'araras.akuanduba@gmail.com', 'São Paulo, Brasil', '9855-2634'),
+(8, 'Yorixiriamori', 'passaro.ianomami@gmail.com', 'São Paulo, Brasil', '9865-2137'),
+(9, 'Yebá Beló', 'dessanas..belo@gmail.com', 'São Paulo, Brasil', '6789-9876'),
+(10, 'Wanadi', 'lecuanas.wanadi@gmail.com', 'São Paulo, Brasil', '1243-2134'),
+(11, 'Yebá Ngoamãn', 'dessanas.ngoaman@gmail.com', 'São Paulo, Brasil', '2020-1520');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `ordem_servico`
+-- Table structure for table `ordem_servico`
 --
 
 CREATE TABLE `ordem_servico` (
@@ -56,16 +69,10 @@ CREATE TABLE `ordem_servico` (
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- RELACIONAMENTOS PARA TABELAS `ordem_servico`:
---   `client_id`
---       `client` -> `client_id`
---
-
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -78,69 +85,66 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELACIONAMENTOS PARA TABELAS `user`:
---
-
---
--- Despejando dados para a tabela `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`, `perfil`) VALUES
 (1, 'Administrador Principal', 'admin', '1234', '940028922', 'admin'),
 (2, 'Bianca Silva', 'beanca', '4321', '948485353', 'admin'),
-(3, 'Usuário Comum', 'user', '1234', '915907530', 'user');
+(3, 'Usuário Comum', 'user', '1234', '915907530', 'user'),
+(4, 'Usuário Teste', 'teste', '4321', '984481618', 'user');
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `client`
+-- Indexes for table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`client_id`);
 
 --
--- Índices de tabela `ordem_servico`
+-- Indexes for table `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   ADD PRIMARY KEY (`os`),
   ADD UNIQUE KEY `client_id` (`client_id`);
 
 --
--- Índices de tabela `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `client`
+-- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de tabela `ordem_servico`
+-- AUTO_INCREMENT for table `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   MODIFY `os` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- Restrições para dumps de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `ordem_servico`
+-- Constraints for table `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   ADD CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
