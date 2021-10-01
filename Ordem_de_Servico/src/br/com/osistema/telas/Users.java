@@ -15,7 +15,7 @@ public class Users extends javax.swing.JInternalFrame {
     }
     
     private void consultar() {
-        String sql = "SELECT * FROM users WHERE user_id=?";
+        String sql = "SELECT * FROM user WHERE user_id=?";
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class Users extends javax.swing.JInternalFrame {
     }
 
     private void adicionar() {
-        String sql = "INSERT INTO users (user_id, user, login, senha, fone, perfil) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (user_id, user, login, senha, fone, perfil) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class Users extends javax.swing.JInternalFrame {
         int excluir = JOptionPane.showConfirmDialog(null, "Tem certeza de que quer excluir?", "Atenção", JOptionPane.YES_NO_OPTION);
         
         if (excluir == JOptionPane.YES_OPTION) {
-            String sql = "DELETE FROM users WHERE user_id=?";
+            String sql = "DELETE FROM user WHERE user_id=?";
         
             try {
                 pst = conexao.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class Users extends javax.swing.JInternalFrame {
     }
     
     private void editar() {
-        String sql = "UPDATE users SET user=?, login=?, senha=?, fone=?, perfil=? WHERE user_id=?";
+        String sql = "UPDATE user SET user=?, login=?, senha=?, fone=?, perfil=? WHERE user_id=?";
         
         try {
             pst = conexao.prepareStatement(sql);

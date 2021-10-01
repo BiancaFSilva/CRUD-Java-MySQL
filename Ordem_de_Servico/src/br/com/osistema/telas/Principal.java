@@ -70,6 +70,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         opCliente.setText("Cliente");
+        opCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opClienteActionPerformed(evt);
+            }
+        });
         menuCadastro.add(opCliente);
 
         opOS.setText("OS");
@@ -182,6 +187,12 @@ public class Principal extends javax.swing.JFrame {
         usuarios.setVisible(true);
         Desktop.add(usuarios);
     }//GEN-LAST:event_menuCadastroActionPerformed
+
+    private void opClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opClienteActionPerformed
+        Clientes clientes = new Clientes();
+        clientes.setVisible(true);
+        Desktop.add(clientes);
+    }//GEN-LAST:event_opClienteActionPerformed
 
     /**
      * @param args the command line arguments
