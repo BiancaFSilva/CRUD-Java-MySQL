@@ -36,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Principal");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -87,6 +88,11 @@ public class Principal extends javax.swing.JFrame {
 
         opUsers.setText("Usuários");
         opUsers.setEnabled(false);
+        opUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opUsersActionPerformed(evt);
+            }
+        });
         menuCadastro.add(opUsers);
 
         Menu.add(menuCadastro);
@@ -157,6 +163,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void opOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opOSActionPerformed
@@ -183,9 +190,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_opSobreActionPerformed
 
     private void menuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroActionPerformed
-        Users usuarios = new Users();
-        usuarios.setVisible(true);
-        Desktop.add(usuarios);
+        
     }//GEN-LAST:event_menuCadastroActionPerformed
 
     private void opClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opClienteActionPerformed
@@ -193,6 +198,12 @@ public class Principal extends javax.swing.JFrame {
         clientes.setVisible(true);
         Desktop.add(clientes);
     }//GEN-LAST:event_opClienteActionPerformed
+
+    private void opUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opUsersActionPerformed
+        Users usuarios = new Users();
+        usuarios.setVisible(true);
+        Desktop.add(usuarios);
+    }//GEN-LAST:event_opUsersActionPerformed
 
     /**
      * @param args the command line arguments

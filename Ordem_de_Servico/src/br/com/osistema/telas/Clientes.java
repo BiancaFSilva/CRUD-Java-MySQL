@@ -1,4 +1,5 @@
 package br.com.osistema.telas;
+
 import java.sql.*;
 import br.com.osistema.dal.ModuloConexao;
 import javax.swing.JOptionPane;
@@ -21,10 +22,10 @@ public class Clientes extends javax.swing.JInternalFrame {
         try {
             pst = conexao.prepareStatement(sql);
             
-            pst.setString(1, txtNome.getText());
-            pst.setString(2, txtEmail.getText());   
-            pst.setString(3, txtEndereco.getText());
-            pst.setString(4, txtFone.getText());
+            pst.setString(2, txtNome.getText());
+            pst.setString(3, txtEmail.getText());   
+            pst.setString(4, txtEndereco.getText());
+            pst.setString(5, txtFone.getText());
             
                         
             if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || 
@@ -103,15 +104,21 @@ public class Clientes extends javax.swing.JInternalFrame {
         tblClientes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Email", "Endereço", "Telefone"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblClientes.setColumnSelectionAllowed(true);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblClientesMouseClicked(evt);
@@ -123,6 +130,7 @@ public class Clientes extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblClientes);
+        tblClientes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         lblNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblNome.setLabelFor(txtNome);
@@ -166,9 +174,9 @@ public class Clientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnInsert)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnUpdate)
-                        .addGap(60, 60, 60)
+                        .addGap(18, 18, 18)
                         .addComponent(btnDelete))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()

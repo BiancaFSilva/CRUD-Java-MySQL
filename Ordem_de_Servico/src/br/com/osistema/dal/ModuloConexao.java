@@ -5,7 +5,7 @@ public class ModuloConexao {
     public static Connection conector() {
         java.sql.Connection conexao = null;
 
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/crud-java-mysql";
         String user = "root";
         String password = "";
@@ -16,7 +16,6 @@ public class ModuloConexao {
             return conexao;
         } catch(Exception e) {
             return null;
-        } 
-    
+        }     
     }
 }

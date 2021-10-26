@@ -18,6 +18,7 @@ public class Sobre extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sobre");
         setResizable(false);
 
         lblSobre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -76,6 +77,7 @@ public class Sobre extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
