@@ -22,11 +22,10 @@ public class Clientes extends javax.swing.JInternalFrame {
         try {
             pst = conexao.prepareStatement(sql);
             
-            pst.setString(2, txtNome.getText());
-            pst.setString(3, txtEmail.getText());   
-            pst.setString(4, txtEndereco.getText());
-            pst.setString(5, txtFone.getText());
-            
+            pst.setString(1, txtNome.getText());
+            pst.setString(2, txtEmail.getText());   
+            pst.setString(3, txtEndereco.getText());
+            pst.setString(4, txtFone.getText());         
                         
             if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || 
                 txtFone.getText().isEmpty() || txtEndereco.getText().isEmpty()) {
@@ -46,8 +45,60 @@ public class Clientes extends javax.swing.JInternalFrame {
         }
     }
     
+    private void editar() {
+        String sql = "UPDATE client SET nome_cli=?, email_cli=?, end_cli=?, fone_cli=? WHERE client_id = ?";
+               
+        try {
+            pst = conexao.prepareStatement(sql);
+            
+            pst.setString(1, txtId.getText()); 
+            pst.setString(2, txtNome.getText());
+            pst.setString(3, txtEmail.getText());   
+            pst.setString(4, txtEndereco.getText());
+            pst.setString(5, txtFone.getText());              
+            
+            if (txtId.getText().isEmpty() || txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || 
+            txtEndereco.getText().isEmpty() || txtFone.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Falha! Preencha todos os campos.");
+            } else {        
+                int atualiza = pst.executeUpdate();
+                if (atualiza > 0) {
+                    JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso");
+                    txtNome.setText(null);
+                    txtEndereco.setText(null);
+                    txtFone.setText(null);
+                    txtEmail.setText(null);                 
+                }                 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private void excluir(){
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja remover este usuário?",
+                "Atenção", JOptionPane.YES_NO_OPTION);
+        if (confirma == JOptionPane.YES_OPTION){
+            String sql = "DELETE FROM client WHERE client_id = ?";
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtId.getText());
+                int apagado = pst.executeUpdate();
+                if (apagado > 0){
+                    JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
+                    txtNome.setText(null);
+                    txtEndereco.setText(null);
+                    txtFone.setText(null);
+                    txtEmail.setText(null);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+    
     private void pesquisarClientes() {
-        String sql = "SELECT * FROM client WHERE nome LIKE ?";
+        String sql = "SELECT * FROM client WHERE nome_cli LIKE ?";
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -61,12 +112,12 @@ public class Clientes extends javax.swing.JInternalFrame {
     
     public void setarCampos() {
         int setar = tblClientes.getSelectedRow();
-        
+
+        txtId.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
         txtNome.setText(tblClientes.getModel().getValueAt(setar, 1).toString());
-        txtEmail.setText(tblClientes.getModel().getValueAt(setar, 2).toString());  
-        txtEndereco.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
-        txtFone.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
-        
+        txtEndereco.setText(tblClientes.getModel().getValueAt(setar, 2).toString());
+        txtFone.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
+        txtEmail.setText(tblClientes.getModel().getValueAt(setar, 4).toString());       
     }
     
     @SuppressWarnings("unchecked")
@@ -88,7 +139,10 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        txtId = new javax.swing.JLabel();
 
+        setIconifiable(true);
+        setMaximizable(true);
         setPreferredSize(new java.awt.Dimension(590, 470));
 
         txtPesquisa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -158,12 +212,30 @@ public class Clientes extends javax.swing.JInternalFrame {
 
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/create.png"))); // NOI18N
         btnInsert.setBorderPainted(false);
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/update.png"))); // NOI18N
         btnUpdate.setBorderPainted(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/delete.png"))); // NOI18N
         btnDelete.setBorderPainted(false);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        txtId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtId.setText("0001");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,7 +249,9 @@ public class Clientes extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdate)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete))
+                        .addComponent(btnDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtId))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +306,8 @@ public class Clientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnUpdate)
                     .addComponent(btnInsert)
-                    .addComponent(btnDelete))
+                    .addComponent(btnDelete)
+                    .addComponent(txtId))
                 .addGap(132, 132, 132))
         );
 
@@ -240,16 +315,28 @@ public class Clientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
-        adicionar();
+        pesquisarClientes();
     }//GEN-LAST:event_btnPesquisaActionPerformed
 
     private void tblClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClientesKeyReleased
-        pesquisarClientes();
+        
     }//GEN-LAST:event_tblClientesKeyReleased
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
         setarCampos();
     }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        adicionar();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        excluir();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        editar();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,6 +353,7 @@ public class Clientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtFone;
+    private javax.swing.JLabel txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
