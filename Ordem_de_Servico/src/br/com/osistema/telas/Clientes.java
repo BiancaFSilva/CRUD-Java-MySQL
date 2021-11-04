@@ -3,6 +3,7 @@ package br.com.osistema.telas;
 import java.sql.*;
 import br.com.osistema.dal.ModuloConexao;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 public class Clientes extends javax.swing.JInternalFrame {
@@ -21,11 +22,11 @@ public class Clientes extends javax.swing.JInternalFrame {
         
         try {
             pst = conexao.prepareStatement(sql);
-            
+           
             pst.setString(1, txtNome.getText());
-            pst.setString(2, txtEmail.getText());   
-            pst.setString(3, txtEndereco.getText());
-            pst.setString(4, txtFone.getText());         
+            pst.setString(2, txtEmail.getText());  
+            pst.setString(3, txtFone.getText());    
+            pst.setString(4, txtEndereco.getText());                 
                         
             if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || 
                 txtFone.getText().isEmpty() || txtEndereco.getText().isEmpty()) {
@@ -34,10 +35,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                 int adicionado = pst.executeUpdate();
                 if (adicionado > 0) {
                     JOptionPane.showMessageDialog(null, "Cliente adicionado com sucesso");
-                    txtNome.setText(null);
-                    txtEmail.setText(null);                    
-                    txtFone.setText(null);
-                    txtEndereco.setText(null);
+                    limpar();  
                 } 
             }
         } catch (Exception e) {
@@ -64,10 +62,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                 int atualiza = pst.executeUpdate();
                 if (atualiza > 0) {
                     JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso");
-                    txtNome.setText(null);
-                    txtEndereco.setText(null);
-                    txtFone.setText(null);
-                    txtEmail.setText(null);                 
+                    limpar();                
                 }                 
             }
         } catch (Exception e) {
@@ -86,10 +81,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                 int apagado = pst.executeUpdate();
                 if (apagado > 0){
                     JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
-                    txtNome.setText(null);
-                    txtEndereco.setText(null);
-                    txtFone.setText(null);
-                    txtEmail.setText(null);
+                    limpar();  
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -97,8 +89,18 @@ public class Clientes extends javax.swing.JInternalFrame {
         }
     }
     
+    private void limpar() {
+        txtPesquisa.setText(null);
+        txtId.setText(null);
+        txtNome.setText(null);
+        txtEndereco.setText(null);
+        txtFone.setText(null);
+        txtEmail.setText(null);
+        ((DefaultTableModel) tblClientes.getModel()).setRowCount(0);
+    }
+    
     private void pesquisarClientes() {
-        String sql = "SELECT * FROM client WHERE nome_cli LIKE ?";
+        String sql = "SELECT client_id  AS 'ID', nome_cli AS Nome, email_cli AS 'Email', end_cli AS 'Endereço', fone_cli AS 'Telefone' FROM client WHERE nome_cli LIKE ?";
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -161,17 +163,9 @@ public class Clientes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nome", "Email", "Endereço", "Telefone"
+                "ID", "Nome", "Email", "Endereço", "Telefone"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         tblClientes.setColumnSelectionAllowed(true);
         tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
