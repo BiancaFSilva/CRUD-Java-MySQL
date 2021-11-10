@@ -14,4 +14,4 @@ DELETE FROM table WHERE (condition);
 ```
 
 ### DER - Diagrama Entidade Relacionamento
-![DER do Banco de Dados](https://user-images.githubusercontent.com/60801421/140310560-fff05dd0-446d-4470-8f3c-f96eb569c9ac.png)
+![DER do Banco de Dados](https://user-images.githubusercontent.com/60801421/141180225-51fd84e3-3cc9-44d6-8261-bb39044275a2.png)
