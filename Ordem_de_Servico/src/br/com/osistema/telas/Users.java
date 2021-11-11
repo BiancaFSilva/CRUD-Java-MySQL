@@ -152,6 +152,7 @@ public class Users extends javax.swing.JInternalFrame {
         lblPerfil = new javax.swing.JLabel();
         comboPerfil = new javax.swing.JComboBox<>();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Usuários");

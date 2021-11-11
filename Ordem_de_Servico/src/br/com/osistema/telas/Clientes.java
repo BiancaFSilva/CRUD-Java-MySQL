@@ -143,8 +143,10 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         txtId = new javax.swing.JLabel();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Clientes");
         setPreferredSize(new java.awt.Dimension(590, 470));
 
         txtPesquisa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N

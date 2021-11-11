@@ -167,7 +167,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void opOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opOSActionPerformed
-        // TODO add your handling code here:
+        OrdemDeServico os = new OrdemDeServico();
+        os.setVisible(true);
+        Desktop.add(os);
     }//GEN-LAST:event_opOSActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
