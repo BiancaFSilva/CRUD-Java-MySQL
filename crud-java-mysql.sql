@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2021 at 08:13 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Tempo de geração: 16-Nov-2021 às 16:07
+-- Versão do servidor: 10.4.20-MariaDB
+-- versão do PHP: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `crud-java-mysql`
+-- Banco de dados: `crud-java-mysql`
 --
+CREATE DATABASE IF NOT EXISTS `crud-java-mysql` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `crud-java-mysql`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Estrutura da tabela `client`
 --
 
 CREATE TABLE `client` (
@@ -36,7 +38,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `client`
+-- Extraindo dados da tabela `client`
 --
 
 INSERT INTO `client` (`client_id`, `nome_cli`, `email_cli`, `end_cli`, `fone_cli`) VALUES
@@ -55,12 +57,14 @@ INSERT INTO `client` (`client_id`, `nome_cli`, `email_cli`, `end_cli`, `fone_cli
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ordem_servico`
+-- Estrutura da tabela `ordem_servico`
 --
 
 CREATE TABLE `ordem_servico` (
   `os` int(11) NOT NULL,
   `data_os` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tipo` varchar(20) NOT NULL,
+  `situacao` varchar(50) NOT NULL,
   `equipamento` varchar(150) NOT NULL,
   `defeito` varchar(150) NOT NULL,
   `servico` varchar(150) NOT NULL,
@@ -69,10 +73,17 @@ CREATE TABLE `ordem_servico` (
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `ordem_servico`
+--
+
+INSERT INTO `ordem_servico` (`os`, `data_os`, `tipo`, `situacao`, `equipamento`, `defeito`, `servico`, `tecnico`, `valor`, `client_id`) VALUES
+(2, '2021-11-16 15:04:49', 'Ordem de Serviço', 'Aguardando Aprovação', 'Computador Intel I5 - 4G de RAM - 2T de HD. COD 1234.5678', 'A placa de vídeo não inicia', 'Trocar placa de vídeo e pente de memória.', 'Marcos', '150.00', 4);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estrutura da tabela `user`
 --
 
 CREATE TABLE `user` (
@@ -85,7 +96,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`, `perfil`) VALUES
@@ -95,56 +106,56 @@ INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`, `perfil`) VALUE
 (4, 'Usuário Teste', 'teste', '4321', '984481618', 'user');
 
 --
--- Indexes for dumped tables
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `client`
+-- Índices para tabela `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`client_id`);
 
 --
--- Indexes for table `ordem_servico`
+-- Índices para tabela `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   ADD PRIMARY KEY (`os`),
   ADD UNIQUE KEY `client_id` (`client_id`);
 
 --
--- Indexes for table `user`
+-- Índices para tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT for table `client`
+-- AUTO_INCREMENT de tabela `client`
 --
 ALTER TABLE `client`
   MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `ordem_servico`
+-- AUTO_INCREMENT de tabela `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
-  MODIFY `os` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- Constraints for dumped tables
+-- Restrições para despejos de tabelas
 --
 
 --
--- Constraints for table `ordem_servico`
+-- Limitadores para a tabela `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   ADD CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
