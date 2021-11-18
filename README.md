@@ -15,3 +15,6 @@ DELETE FROM table WHERE (condition);
 
 ### DER - Diagrama Entidade Relacionamento
 ![DER do Banco de Dados](https://user-images.githubusercontent.com/60801421/141180225-51fd84e3-3cc9-44d6-8261-bb39044275a2.png)
+
+---
+<p align="center"> @BiancaFSilva 2021 </p>
