@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Nov-2021 às 16:07
+-- Tempo de geração: 25-Nov-2021 às 12:59
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.9
 
@@ -78,7 +78,8 @@ CREATE TABLE `ordem_servico` (
 --
 
 INSERT INTO `ordem_servico` (`os`, `data_os`, `tipo`, `situacao`, `equipamento`, `defeito`, `servico`, `tecnico`, `valor`, `client_id`) VALUES
-(2, '2021-11-16 15:04:49', 'Ordem de Serviço', 'Aguardando Aprovação', 'Computador Intel I5 - 4G de RAM - 2T de HD. COD 1234.5678', 'A placa de vídeo não inicia', 'Trocar placa de vídeo e pente de memória.', 'Marcos', '150.00', 4);
+(1, '2021-11-25 11:57:38', 'Orçamento', 'Orçamento Reprovado', 'Xiaomi Mi A2 Lite - 32GB', 'Android 9 não inicia', 'Formatação de fábrica para restauração do Android', 'Marcos', '65.00', 3),
+(2, '2021-11-16 18:04:49', 'Ordem de Serviço', 'Aguardando Aprovação', 'Computador Intel I5 - 4G de RAM - 2T de HD. COD 1234.5678', 'A placa de vídeo não inicia', 'Trocar placa de vídeo e pente de memória.', 'Marcos', '150.00', 4);
 
 -- --------------------------------------------------------
 
