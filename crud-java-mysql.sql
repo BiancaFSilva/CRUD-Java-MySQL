@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Nov-2021 às 12:59
--- Versão do servidor: 10.4.20-MariaDB
--- versão do PHP: 8.0.9
+-- Generation Time: Nov 25, 2021 at 11:57 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `crud-java-mysql`
+-- Database: `crud-java-mysql`
 --
 CREATE DATABASE IF NOT EXISTS `crud-java-mysql` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `crud-java-mysql`;
@@ -26,7 +26,7 @@ USE `crud-java-mysql`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `client`
+-- Table structure for table `client`
 --
 
 CREATE TABLE `client` (
@@ -38,7 +38,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `client`
+-- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`client_id`, `nome_cli`, `email_cli`, `end_cli`, `fone_cli`) VALUES
@@ -57,7 +57,7 @@ INSERT INTO `client` (`client_id`, `nome_cli`, `email_cli`, `end_cli`, `fone_cli
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ordem_servico`
+-- Table structure for table `ordem_servico`
 --
 
 CREATE TABLE `ordem_servico` (
@@ -74,17 +74,22 @@ CREATE TABLE `ordem_servico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `ordem_servico`
+-- Dumping data for table `ordem_servico`
 --
 
 INSERT INTO `ordem_servico` (`os`, `data_os`, `tipo`, `situacao`, `equipamento`, `defeito`, `servico`, `tecnico`, `valor`, `client_id`) VALUES
-(1, '2021-11-25 11:57:38', 'Orçamento', 'Orçamento Reprovado', 'Xiaomi Mi A2 Lite - 32GB', 'Android 9 não inicia', 'Formatação de fábrica para restauração do Android', 'Marcos', '65.00', 3),
-(2, '2021-11-16 18:04:49', 'Ordem de Serviço', 'Aguardando Aprovação', 'Computador Intel I5 - 4G de RAM - 2T de HD. COD 1234.5678', 'A placa de vídeo não inicia', 'Trocar placa de vídeo e pente de memória.', 'Marcos', '150.00', 4);
+(1, '2021-11-25 14:57:38', 'Orçamento', 'Orçamento Reprovado', 'Xiaomi Mi A2 Lite - 32GB', 'Android 9 não inicia', 'Formatação de fábrica para restauração do Android', 'Marcos', '65.00', 3),
+(2, '2021-11-16 21:04:49', 'Ordem de Serviço', 'Aguardando Aprovação', 'Computador Intel I5 - 4G de RAM - 2T de HD. COD 1234.5678', 'A placa de vídeo não inicia', 'Trocar placa de vídeo e pente de memória.', 'Marcos', '150.00', 4),
+(3, '2021-11-25 21:53:31', 'Orem de Serviço', 'Aguardando Peças', 'Impressora HP Deskjet F2050', 'Cabo USB não conecta com o computador/notebook', 'Trocar cabo e adaptador', 'Paola', '30.00', 10),
+(4, '2021-11-25 22:26:41', 'Orem de Serviço', 'Abandonado', 'Mouse Óptico Multilaser 1200dpi - conexão USB', 'Scroll e cabo quebrados', 'Trocar cabo e recolocar scroll', 'Matias', '24.99', 1),
+(5, '2021-11-25 22:11:45', 'Orçamento', 'Aguardando Aprovação', 'Caixa de Som Bluetooth/Rádio/Pen-drive KTS-935', 'Som sai abafado, bluetooth não conecta e quando conecta a bateria acaba rápido ', 'Verificar cabos, trocar bateria e saída de som', 'Paola', '149.99', 2),
+(6, '2021-11-25 22:44:24', 'Ordem de Serviço', 'Na bancada', 'Tablet Positivo Ypy - 16GB - 7\"', 'Lentidão após atualizardo Android 4 para o Android 7', 'Backup de dados e redefinição de fábrica. *O cliente autorizou a venda ao abandonar o produto', 'Matias', '699.00', 6),
+(9, '2021-11-25 22:51:36', 'Orçamento', 'Entregue', 'Câmera Fotográfica HD Samsung PL120 - 1.5\" front LCD - 14.2 megapixels', 'Lente quebrada', 'Trocar lente', 'Paola', '80.00', 8);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -97,7 +102,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`, `perfil`) VALUES
@@ -107,56 +112,56 @@ INSERT INTO `user` (`user_id`, `user`, `login`, `senha`, `fone`, `perfil`) VALUE
 (4, 'Usuário Teste', 'teste', '4321', '984481618', 'user');
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `client`
+-- Indexes for table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`client_id`);
 
 --
--- Índices para tabela `ordem_servico`
+-- Indexes for table `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   ADD PRIMARY KEY (`os`),
   ADD UNIQUE KEY `client_id` (`client_id`);
 
 --
--- Índices para tabela `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `client`
+-- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
   MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de tabela `ordem_servico`
+-- AUTO_INCREMENT for table `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
-  MODIFY `os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de tabela `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- Restrições para despejos de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `ordem_servico`
+-- Constraints for table `ordem_servico`
 --
 ALTER TABLE `ordem_servico`
   ADD CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);

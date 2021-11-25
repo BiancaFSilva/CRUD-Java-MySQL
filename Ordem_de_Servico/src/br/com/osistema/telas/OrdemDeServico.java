@@ -2,7 +2,6 @@ package br.com.osistema.telas;
 
 import java.sql.*;
 import br.com.osistema.dal.ModuloConexao;
-import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -80,7 +79,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
     }
 
     private void emitirOS() {
-        String sql = "INSERT INTO `ordem_servico` (`tipo`, `situacao`, `equipamento`, `defeito`, `servico`, `tecnico`, `valor`, `client_id`) VALUES ('', '', '', '', '', '', '', '')";
+        String sql = "INSERT INTO `ordem_servico` (tipo, situacao, equipamento, defeito, servico, tecnico, valor, client_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -160,7 +159,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Ordem de Serviç");
+        setTitle("Ordem de Serviço ");
         setAutoscrolls(true);
         setPreferredSize(new java.awt.Dimension(590, 470));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -181,9 +180,11 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
             }
         });
 
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(575, 470));
+
         jPanel1.setAutoscrolls(true);
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(573, 680));
+        jPanel1.setPreferredSize(new java.awt.Dimension(573, 690));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("N.º OS");
@@ -345,7 +346,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
@@ -393,9 +394,9 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                         .addComponent(radioOrcamento)
                         .addGap(40, 40, 40)
                         .addComponent(radioOrdemDeServico)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(299, 299, 299)
+                .addGap(231, 231, 231)
                 .addComponent(btnPrint)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -407,12 +408,12 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
                     .addComponent(txtDataOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioOrcamento)
                     .addComponent(radioOrdemDeServico))
@@ -444,12 +445,12 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                     .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrint)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel1);
 
-        getContentPane().add(jScrollPane2, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
 
         getAccessibleContext().setAccessibleName("Ordem de Serviço");
 
