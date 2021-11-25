@@ -2,7 +2,8 @@ package br.com.osistema.telas;
 
 import java.sql.*;
 import br.com.osistema.dal.ModuloConexao;
-import javax.swing.JOptionPane;
+import java.awt.BorderLayout;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -27,6 +28,46 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
             pst.setString(1, txtPesquisa.getText() + "%");
             rs = pst.executeQuery();
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private void pesquisarOS() {
+        String numOS = JOptionPane.showInputDialog("Número da Ordem de Serviço: ");
+        String sql = "SELECT * FROM ordem_servico WHERE os = " + numOS;
+        
+        try {
+            pst = conexao.prepareStatement(sql);            
+            rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                txtOS.setText(rs.getString(1));
+                txtDataOS.setText(rs.getString(2)); 
+                
+                String radioTipo = rs.getString(3);
+                if (radioTipo.equals("Ordem de Serviço")) {
+                    radioOrdemDeServico.setSelected(true);
+                    tipo = "Ordem de Serviço";
+                } else {
+                    radioOrcamento.setSelected(true);
+                    tipo = "Orçamento";
+                }
+                
+                cmbSituacao.setSelectedItem(rs.getString(4));
+                txtEquipamento.setText(rs.getString(5));
+                txtDefeito.setText(rs.getString(6));
+                txtServico.setText(rs.getString(7));
+                txtTecnico.setText(rs.getString(8));
+                txtValorTotal.setText(rs.getString(9));
+                txtID.setText(rs.getString(10));
+                
+                btnInsert.setEnabled(false);
+                txtPesquisa.setEnabled(false);
+                tblClientes.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ordem de serviço indisponível ou não cadastrada.");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -78,16 +119,17 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         ((DefaultTableModel) tblClientes.getModel()).setRowCount(0);
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btnGrupoOrdemOrcamento = new javax.swing.ButtonGroup();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtOS = new javax.swing.JTextField();
+        txtDataOS = new javax.swing.JTextField();
         radioOrdemDeServico = new javax.swing.JRadioButton();
         radioOrcamento = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
@@ -120,7 +162,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Ordem de Serviç");
         setAutoscrolls(true);
-        setPreferredSize(new java.awt.Dimension(590, 670));
+        setPreferredSize(new java.awt.Dimension(590, 470));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -141,7 +183,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
 
         jPanel1.setAutoscrolls(true);
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(573, 491));
+        jPanel1.setPreferredSize(new java.awt.Dimension(573, 680));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("N.º OS");
@@ -149,11 +191,11 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Data");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtOS.setEditable(false);
+        txtOS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDataOS.setEditable(false);
+        txtDataOS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btnGrupoOrdemOrcamento.add(radioOrdemDeServico);
         radioOrdemDeServico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -274,8 +316,18 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         txtValorTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/create.png"))); // NOI18N
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/read.png"))); // NOI18N
+        btnRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/update.png"))); // NOI18N
 
@@ -293,11 +345,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(btnPrint)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
+                .addContainerGap(137, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
@@ -305,11 +353,11 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(31, 31, 31)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtDataOS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtOS, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(70, 70, 70)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -345,7 +393,11 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                         .addComponent(radioOrcamento)
                         .addGap(40, 40, 40)
                         .addComponent(radioOrdemDeServico)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(btnPrint)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,12 +405,12 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDataOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,16 +447,11 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
-        );
+        jScrollPane2.setViewportView(jPanel1);
+
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.PAGE_START);
+
+        getAccessibleContext().setAccessibleName("Ordem de Serviço");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -431,8 +478,16 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        emitirOS();
+        //imprimirOS();
     }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        emitirOS();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
+        pesquisarOS();
+    }//GEN-LAST:event_btnReadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,8 +505,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDefeito;
     private javax.swing.JLabel lblEquipamento;
     private javax.swing.JLabel lblID;
@@ -461,9 +515,11 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioOrcamento;
     private javax.swing.JRadioButton radioOrdemDeServico;
     private javax.swing.JTable tblClientes;
+    private javax.swing.JTextField txtDataOS;
     private javax.swing.JTextField txtDefeito;
     private javax.swing.JTextField txtEquipamento;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtOS;
     private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtServico;
     private javax.swing.JTextField txtTecnico;

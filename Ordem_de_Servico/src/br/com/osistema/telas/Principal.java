@@ -63,6 +63,8 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/x.png"))); // NOI18N
 
+        Menu.setAutoscrolls(true);
+
         menuCadastro.setText("Cadastro");
         menuCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
