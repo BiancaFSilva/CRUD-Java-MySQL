@@ -50,7 +50,7 @@ INSERT INTO `client` (`client_id`, `nome_cli`, `email_cli`, `end_cli`, `fone_cli
 (6, 'Sumé', 'sume@gmail.com', 'São Paulo, Brasil', '4826-9537'),
 (7, 'Akuanduba', 'araras.akuanduba@gmail.com', 'São Paulo, Brasil', '9855-2634'),
 (8, 'Yorixiriamori', 'passaro.ianomami@gmail.com', 'São Paulo, Brasil', '9865-2137'),
-(9, 'Yebá Beló', 'dessanas..belo@gmail.com', 'São Paulo, Brasil', '6789-9876'),
+(9, 'Yebá Beló', 'dessanas.belo@gmail.com', 'São Paulo, Brasil', '6789-9876'),
 (10, 'Wanadi', 'lecuanas.wanadi@gmail.com', 'São Paulo, Brasil', '1243-2134'),
 (11, 'Yebá Ngoamãn', 'dessanas.ngoaman@gmail.com', 'São Paulo, Brasil', '2020-1520');
 
@@ -80,8 +80,8 @@ CREATE TABLE `ordem_servico` (
 INSERT INTO `ordem_servico` (`os`, `data_os`, `tipo`, `situacao`, `equipamento`, `defeito`, `servico`, `tecnico`, `valor`, `client_id`) VALUES
 (1, '2021-11-25 14:57:38', 'Orçamento', 'Orçamento Reprovado', 'Xiaomi Mi A2 Lite - 32GB', 'Android 9 não inicia', 'Formatação de fábrica para restauração do Android', 'Marcos', '65.00', 3),
 (2, '2021-11-16 21:04:49', 'Ordem de Serviço', 'Aguardando Aprovação', 'Computador Intel I5 - 4G de RAM - 2T de HD. COD 1234.5678', 'A placa de vídeo não inicia', 'Trocar placa de vídeo e pente de memória.', 'Marcos', '150.00', 4),
-(3, '2021-11-25 21:53:31', 'Orem de Serviço', 'Aguardando Peças', 'Impressora HP Deskjet F2050', 'Cabo USB não conecta com o computador/notebook', 'Trocar cabo e adaptador', 'Paola', '30.00', 10),
-(4, '2021-11-25 22:26:41', 'Orem de Serviço', 'Abandonado', 'Mouse Óptico Multilaser 1200dpi - conexão USB', 'Scroll e cabo quebrados', 'Trocar cabo e recolocar scroll', 'Matias', '24.99', 1),
+(3, '2021-11-25 21:53:31', 'Ordem de Serviço', 'Aguardando Peças', 'Impressora HP Deskjet F2050', 'Cabo USB não conecta com o computador/notebook', 'Trocar cabo e adaptador', 'Paola', '30.00', 10),
+(4, '2021-11-25 22:26:41', 'Ordem de Serviço', 'Abandonado', 'Mouse Óptico Multilaser 1200dpi - conexão USB', 'Scroll e cabo quebrados', 'Trocar cabo e recolocar scroll', 'Matias', '24.99', 1),
 (5, '2021-11-25 22:11:45', 'Orçamento', 'Aguardando Aprovação', 'Caixa de Som Bluetooth/Rádio/Pen-drive KTS-935', 'Som sai abafado, bluetooth não conecta e quando conecta a bateria acaba rápido ', 'Verificar cabos, trocar bateria e saída de som', 'Paola', '149.99', 2),
 (6, '2021-11-25 22:44:24', 'Ordem de Serviço', 'Na bancada', 'Tablet Positivo Ypy - 16GB - 7\"', 'Lentidão após atualizardo Android 4 para o Android 7', 'Backup de dados e redefinição de fábrica. *O cliente autorizou a venda ao abandonar o produto', 'Matias', '699.00', 6),
 (9, '2021-11-25 22:51:36', 'Orçamento', 'Entregue', 'Câmera Fotográfica HD Samsung PL120 - 1.5\" front LCD - 14.2 megapixels', 'Lente quebrada', 'Trocar lente', 'Paola', '80.00', 8);
