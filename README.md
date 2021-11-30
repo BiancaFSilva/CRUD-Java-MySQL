@@ -16,9 +16,29 @@ DELETE FROM table WHERE (condition);
 ### DER - Diagrama Entidade Relacionamento
 ![DER do Banco de Dados](https://user-images.githubusercontent.com/60801421/141180225-51fd84e3-3cc9-44d6-8261-bb39044275a2.png)
 
-### Telas
-Todas as telas do possuem as funcionalidades das operações do CRUD. A partir da tela OS, foram incluídas algumas funcionalidades como por exemplo a desabilitação/habilitação de alguns botões e pesquisa avançada por registros a partir de um caracter digitado.
+### TECNOLOGIAS
+Abaixo estão listadas as linguagens de programação, os programas para a realização do projeto e as bibliotecas utilizadas durante o desenvolvimento do projeto:
 
+#### Programação
+- Java
+- MySQL
+
+#### Programas
+- JDK 16
+- Apache Netbeans IDE 12.4
+- Xampp (phpMyAdmin)
+
+#### Bibliotecas
+- mysql-connector-java-8.0.26
+- protobuf-java-3.11.4
+- rs2xml
+
+### SISTEMA
+Todas as telas do possuem as funcionalidades das operações do CRUD. A partir da tela OS, foram incluídas algumas funcionalidades como por exemplo a desabilitação e a habilitação de alguns botões e a pesquisa avançada por registros a partir de um caracter digitado.
+
+#### Mapa do Site/Projeto
+
+#### Telas
 Login <br>
 ![image](https://user-images.githubusercontent.com/60801421/144069040-575a317f-de72-48b9-bfd9-4c952bcdde37.png)
 
@@ -41,7 +61,6 @@ Sobre <br>
 Sair <br> 
 ![image](https://user-images.githubusercontent.com/60801421/144068848-866da3d9-4288-4c22-9ce1-51db7abf4af2.png)
 
-### Bibliotecas
 
 ---
 <p align="center"> @BiancaFSilva 2021 </p>
