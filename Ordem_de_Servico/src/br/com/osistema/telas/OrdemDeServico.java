@@ -79,7 +79,7 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
     }
 
     private void emitirOS() {
-        String sql = "INSERT INTO `ordem_servico` (tipo, situacao, equipamento, defeito, servico, tecnico, valor, client_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ordem_servico (tipo, situacao, equipamento, defeito, servico, tecnico, valor, client_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -90,8 +90,8 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
             pst.setString(4, txtDefeito.getText());       
             pst.setString(5, txtServico.getText());    
             pst.setString(6, txtTecnico.getText());   
-            pst.setString(7, txtValorTotal.getText());    
-            pst.setString(8, txtID.getText());   
+            pst.setString(7, txtValorTotal.getText().replace(",","."));    
+            pst.setString(8, txtOS.getText());   
                         
             if (txtEquipamento.getText().isEmpty() || txtDefeito.getText().isEmpty() ||  txtID.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos");
@@ -104,6 +104,56 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private void editarOS() {
+            String sql = "UPDATE ordem_servico SET tipo = ?, situacao = ?, equipamento = ?, defeito = ?, servico = ?, tecnico = ?, valor = ? WHERE os = ?";
+        
+            try {
+                pst = conexao.prepareStatement(sql);
+                
+                pst.setString(1, tipo);
+                pst.setString(2, cmbSituacao.getSelectedItem().toString());  
+                pst.setString(3, txtEquipamento.getText());    
+                pst.setString(4, txtDefeito.getText());       
+                pst.setString(5, txtServico.getText());    
+                pst.setString(6, txtTecnico.getText());   
+                pst.setString(7, txtValorTotal.getText().replace(",","."));   
+                pst.setString(8, txtOS.getText());   
+             
+                if (txtEquipamento.getText().isEmpty() || txtDefeito.getText().isEmpty() ||  txtID.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                } else {
+                    int update = pst.executeUpdate();
+                    if (update > 0) {
+                        JOptionPane.showMessageDialog(null, "Ordem de Serviço atualizada com sucesso");
+                        limpar();  
+                    } 
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+    }
+        
+    private void excluirOS() {
+        int excluir = JOptionPane.showConfirmDialog(null, "Tem certeza de que quer excluir?", "Atenção", JOptionPane.YES_NO_OPTION);
+        
+        if (excluir == JOptionPane.YES_OPTION) {
+            String sql = "DELETE FROM ordem_servico WHERE os = ?";
+        
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtOS.getText());
+                int apaga = pst.executeUpdate();
+
+                if (apaga > 0) {                
+                    JOptionPane.showMessageDialog(null, "Ordem de serviço excluida com sucesso");
+                    limpar();  
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
     }
     
@@ -331,8 +381,18 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
         });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/update.png"))); // NOI18N
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/delete.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/osistema/icones/print.png"))); // NOI18N
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
@@ -489,6 +549,14 @@ public class OrdemDeServico extends javax.swing.JInternalFrame {
     private void btnReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadActionPerformed
         pesquisarOS();
     }//GEN-LAST:event_btnReadActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        excluirOS();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        editarOS();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

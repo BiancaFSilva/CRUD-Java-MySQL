@@ -48,12 +48,12 @@ public class Clientes extends javax.swing.JInternalFrame {
                
         try {
             pst = conexao.prepareStatement(sql);
-            
-            pst.setString(1, txtId.getText()); 
-            pst.setString(2, txtNome.getText());
-            pst.setString(3, txtEmail.getText());   
-            pst.setString(4, txtEndereco.getText());
-            pst.setString(5, txtFone.getText());              
+                        
+            pst.setString(1, txtNome.getText());
+            pst.setString(2, txtEmail.getText());   
+            pst.setString(3, txtEndereco.getText());
+            pst.setString(4, txtFone.getText());  
+            pst.setString(5, txtId.getText());             
             
             if (txtId.getText().isEmpty() || txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || 
             txtEndereco.getText().isEmpty() || txtFone.getText().isEmpty()) {
