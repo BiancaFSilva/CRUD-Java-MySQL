@@ -16,5 +16,32 @@ DELETE FROM table WHERE (condition);
 ### DER - Diagrama Entidade Relacionamento
 ![DER do Banco de Dados](https://user-images.githubusercontent.com/60801421/141180225-51fd84e3-3cc9-44d6-8261-bb39044275a2.png)
 
+### Telas
+Todas as telas do possuem as funcionalidades das operações do CRUD. A partir da tela OS, foram incluídas algumas funcionalidades como por exemplo a desabilitação/habilitação de alguns botões e pesquisa avançada por registros a partir de um caracter digitado.
+
+Login <br>
+![image](https://user-images.githubusercontent.com/60801421/144069040-575a317f-de72-48b9-bfd9-4c952bcdde37.png)
+
+Principal <br> 
+![Tela principal](https://user-images.githubusercontent.com/60801421/144068562-e1cbdbd4-5341-4273-a2d0-2cff047a6ddc.png)
+
+Formulário de Clientes <br> 
+![image](https://user-images.githubusercontent.com/60801421/144070143-98b91376-6bfb-4924-9b60-4207c2713d91.png)
+
+Formulário de Ordens de Serviço <br>
+![image](https://user-images.githubusercontent.com/60801421/144070537-b9ce8aa4-e9dd-4053-bbda-23d1d8b016a0.png)
+![image](https://user-images.githubusercontent.com/60801421/144070939-aee5b7e9-85c9-4cb1-b961-c084b88ce3a3.png)
+
+Formulário de Usuários <br>
+![image](https://user-images.githubusercontent.com/60801421/144069897-42db6371-1915-4df0-9a59-1498536d190a.png)
+
+Sobre <br> 
+![image](https://user-images.githubusercontent.com/60801421/144068755-a2903061-6566-44d3-8fbf-4d1089797783.png)
+
+Sair <br> 
+![image](https://user-images.githubusercontent.com/60801421/144068848-866da3d9-4288-4c22-9ce1-51db7abf4af2.png)
+
+### Bibliotecas
+
 ---
 <p align="center"> @BiancaFSilva 2021 </p>
