@@ -19,9 +19,8 @@ DELETE FROM table WHERE (condition);
 ### TECNOLOGIAS
 Abaixo estão listadas as linguagens de programação, os programas para a realização do projeto e as bibliotecas utilizadas durante o desenvolvimento do projeto:
 
-#### Programação
-- Java
-- MySQL
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![MySQL](https://camo.githubusercontent.com/b46e59b09c063a31380646688a68018381767a7a206547c93f896df4643671e9/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d7973716c2d2532333030303030662e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6d7973716c266c6f676f436f6c6f723d7768697465)
 
 #### Programas
 - JDK 16
@@ -36,9 +35,6 @@ Abaixo estão listadas as linguagens de programação, os programas para a reali
 ### SISTEMA
 Todas as telas do possuem as funcionalidades das operações do CRUD. A partir da tela OS, foram incluídas algumas funcionalidades como por exemplo a desabilitação e a habilitação de alguns botões e a pesquisa avançada por registros a partir de um caracter digitado.
 
-#### Mapa do Site/Projeto
-
-#### Telas
 Login <br>
 ![image](https://user-images.githubusercontent.com/60801421/144069040-575a317f-de72-48b9-bfd9-4c952bcdde37.png)
 
